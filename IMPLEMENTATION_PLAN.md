@@ -311,20 +311,20 @@ Seed the following so the app is usable immediately:
 ## 8. Phased Implementation
 
 ### PHASE 0 — Project setup
-- [ ] **0.1** Initialize Next.js (App Router, TypeScript, Tailwind, ESLint, `src/` dir) with pnpm.
-- [ ] **0.2** Install and initialize shadcn/ui. Add: button, card, input, label, dialog, tabs, progress, badge, checkbox, select, skeleton, toast, dropdown-menu, sheet.
-- [ ] **0.3** Create `.env.example`, `CLAUDE.md` (copy of Section 2), and the folder structure from Section 4 (empty placeholder files are fine).
-- [ ] **0.4** Add Supabase clients (`@supabase/ssr`): browser client, server client, middleware session refresh.
-- [ ] **0.5** Add GitHub Actions workflow: `pnpm install`, `pnpm lint`, `pnpm tsc --noEmit`, `pnpm build`.
+- [x] **0.1** Initialize Next.js (App Router, TypeScript, Tailwind, ESLint, `src/` dir) with pnpm.
+- [x] **0.2** Install and initialize shadcn/ui. Add: button, card, input, label, dialog, tabs, progress, badge, checkbox, select, skeleton, toast, dropdown-menu, sheet.
+- [x] **0.3** Create `.env.example`, `CLAUDE.md` (copy of Section 2), and the folder structure from Section 4 (empty placeholder files are fine).
+- [x] **0.4** Add Supabase clients (`@supabase/ssr`): browser client, server client, middleware session refresh.
+- [x] **0.5** Add GitHub Actions workflow: `pnpm install`, `pnpm lint`, `pnpm tsc --noEmit`, `pnpm build`.
 
 **Acceptance:** `pnpm dev` runs, `pnpm build` passes, CI is green.
 
 ### PHASE 1 — Auth and layout
-- [ ] **1.1** Run migrations 0001 and 0002 on Supabase. Generate types into `src/types/database.ts`.
-- [ ] **1.2** Build `/login` and `/signup` (email and password) plus Google OAuth. Implement `/auth/callback`.
-- [ ] **1.3** `middleware.ts`: redirect unauthenticated users from `(app)` routes to `/login`; redirect logged-in users away from auth pages.
-- [ ] **1.4** App shell: sidebar on desktop, bottom tab bar on mobile. Nav items: Dashboard, Syllabus, Practice, Tests, Analytics, Planner, Bookmarks. Theme toggle (light and dark).
-- [ ] **1.5** First-login onboarding: choose target exam, daily goal hours, optional exam date. Save to `profiles`.
+- [x] **1.1** Run migrations 0001 and 0002 on Supabase. Generate types into `src/types/database.ts`.
+- [x] **1.2** Build `/login` and `/signup` (email and password) plus Google OAuth. Implement `/auth/callback`.
+- [x] **1.3** `middleware.ts`: redirect unauthenticated users from `(app)` routes to `/login`; redirect logged-in users away from auth pages.
+- [x] **1.4** App shell: sidebar on desktop, bottom tab bar on mobile. Nav items: Dashboard, Syllabus, Practice, Tests, Analytics, Planner, Bookmarks. Theme toggle (light and dark).
+- [x] **1.5** First-login onboarding: choose target exam, daily goal hours, optional exam date. Save to `profiles`.
 
 **Acceptance:** A new user can sign up, complete onboarding, see the shell, and log out. Two different accounts cannot see each other's profile data.
 
@@ -483,3 +483,5 @@ Keep a `BACKLOG.md` file for ideas that come up during development instead of bu
 > The agent appends a line here after each completed task: `YYYY-MM-DD | task id | note / assumption`
 
 - _(empty)_
+2026-10-10 | Phase 0 | Completed project setup, shadcn, and supabase clients.
+2026-10-10 | Phase 1 | Completed auth, layouts, and onboarding.
