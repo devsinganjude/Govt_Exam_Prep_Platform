@@ -485,3 +485,4 @@ Keep a `BACKLOG.md` file for ideas that come up during development instead of bu
 - _(empty)_
 2026-10-10 | Phase 0 | Completed project setup, shadcn, and supabase clients.
 2026-10-10 | Phase 1 | Completed auth, layouts, and onboarding.
+2026-10-11 | Phase 2 | Completed dashboard and syllabus views.
