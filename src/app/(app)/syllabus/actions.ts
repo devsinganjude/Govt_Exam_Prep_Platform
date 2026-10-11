@@ -2,8 +2,8 @@
 
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
-
-const REVISION_INTERVALS_DAYS = [1, 3, 7, 21, 60]
+import { getInitialRevisionData } from '@/lib/spaced-repetition'
+import { logActivity } from '@/lib/activity'
 
 export async function updateTopicStatus(topicId: string, status: 'not_started' | 'in_progress' | 'done') {
   const supabase = await createClient()
@@ -17,13 +17,14 @@ export async function updateTopicStatus(topicId: string, status: 'not_started' |
     .eq('topic_id', topicId)
     .maybeSingle()
 
-  const updateData: { status: string; revision_stage?: number; next_revision_at?: string } = { status }
+  const updateData: { status: string; revision_stage?: number; next_revision_at?: string | null } = { status }
 
   if (status === 'done' && (!current || current.status !== 'done')) {
-    const nextDate = new Date()
-    nextDate.setDate(nextDate.getDate() + REVISION_INTERVALS_DAYS[0])
-    updateData.revision_stage = 0
-    updateData.next_revision_at = nextDate.toISOString()
+    const { revision_stage, next_revision_at } = getInitialRevisionData()
+    updateData.revision_stage = revision_stage
+    updateData.next_revision_at = next_revision_at.toISOString()
+  } else if (status !== 'done' && current?.status === 'done') {
+    updateData.next_revision_at = null
   }
 
   const { error } = await supabase
@@ -42,6 +43,11 @@ export async function updateTopicStatus(topicId: string, status: 'not_started' |
     throw new Error('Failed to update progress')
   }
 
+  // Log activity in background
+  logActivity('topic_status_change')
+
   revalidatePath('/syllabus')
   revalidatePath('/dashboard')
+  revalidatePath('/planner')
 }
+

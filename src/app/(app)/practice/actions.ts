@@ -1,5 +1,7 @@
 'use server'
 
+import { logActivity } from '@/lib/activity'
+
 import { createClient } from '@/lib/supabase/server'
 
 export async function getNextQuestion(topicId: string, ignoreIds: string[] = []) {
@@ -45,7 +47,6 @@ export async function checkBookmarkStatus(questionId: string) {
   const { count } = await supabase.from('bookmarks').select('*', { count: 'exact', head: true })
     .eq('user_id', user.id)
     .eq('question_id', questionId)
-
   return count ? count > 0 : false
 }
 
@@ -105,4 +106,7 @@ export async function recordPracticeAnswer(topicId: string, questionId: string, 
     is_correct: isCorrect,
     time_spent_sec: 15 // Placeholder
   }, { onConflict: 'attempt_id,question_id' })
+
+  // Log activity
+  logActivity('practice_question')
 }

@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { calculateScore } from '@/lib/scoring'
+import { logActivity } from '@/lib/activity'
 import { revalidatePath } from 'next/cache'
 
 export async function createCustomTest(formData: FormData) {
@@ -118,6 +119,9 @@ export async function submitTestAttempt(attemptId: string) {
     score,
     time_taken_sec: timeTaken
   }).eq('id', attemptId)
+
+  // Log activity in background
+  logActivity('test_submitted')
 
   revalidatePath('/tests')
   revalidatePath('/dashboard')

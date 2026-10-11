@@ -338,11 +338,11 @@ Seed the following so the app is usable immediately:
 **Acceptance:** Progress persists after refresh. Percentages are correct. Works on a 360px screen.
 
 ### PHASE 3 — Practice mode and question bank
-- [ ] **3.1** `/practice` filter bar: subject, topic, difficulty, "only bookmarked", "only unverified hidden" toggle (default: show verified and unverified, with a badge on unverified).
-- [ ] **3.2** Question card: show the question, 4 options, and on selecting an option immediately reveal correct or wrong plus the explanation. Next and Previous buttons. Show the year and source.
-- [ ] **3.3** Bookmark button with optional note (stored in `bookmarks`).
-- [ ] **3.4** `/bookmarks`: list saved questions with notes, and a remove action.
-- [ ] **3.5** `/admin/import`: CSV upload (papaparse) → preview table → validation (zod) → insert via a server action using the service role key. Restrict to a single owner email set in env var `ADMIN_EMAIL`.
+- [x] **3.1** `/practice` filter bar: subject, topic, difficulty, "only bookmarked", "only unverified hidden" toggle (default: show verified and unverified, with a badge on unverified).
+- [x] **3.2** Question card: show the question, 4 options, and on selecting an option immediately reveal correct or wrong plus the explanation. Next and Previous buttons. Show the year and source.
+- [x] **3.3** Bookmark button with optional note (stored in `bookmarks`).
+- [x] **3.4** `/bookmarks`: list saved questions with notes, and a remove action.
+- [x] **3.5** `/admin/import`: CSV upload (papaparse) → preview table → validation (zod) → insert via a server action using the service role key. Restrict to a single owner email set in env var `ADMIN_EMAIL`.
   - CSV columns: `exam,subject,topic,question_text,option_a,option_b,option_c,option_d,correct_option(A-D),explanation,difficulty,year,source,verified`
   - Create subjects and topics if they do not exist.
 
@@ -371,10 +371,10 @@ Seed the following so the app is usable immediately:
 **Acceptance:** Charts render with real data and with an empty state when no attempts exist.
 
 ### PHASE 6 — Planner and revision
-- [ ] **6.1** `/planner`: today's plan, which includes (a) topics due for revision (`next_revision_at <= now()`), (b) next three "not started" or "in progress" topics, (c) daily goal hours from the profile.
-- [ ] **6.2** "Mark revised" button on due topics, which advances `revision_stage` and recomputes `next_revision_at` (Section 9.2).
-- [ ] **6.3** Study streak: count consecutive days with at least one of: topic status change, practice question answered, or test submitted. Add a lightweight `activity_log` table (migration 0003) with `user_id, date, type`, protected by RLS.
-- [ ] **6.4** Countdown to the exam date from the profile, if set.
+- [x] **6.1** `/planner`: today's plan, which includes (a) topics due for revision (`next_revision_at <= now()`), (b) next three "not started" or "in progress" topics, (c) daily goal hours from the profile.
+- [x] **6.2** "Mark revised" button on due topics, which advances `revision_stage` and recomputes `next_revision_at` (Section 9.2).
+- [x] **6.3** Study streak: count consecutive days with at least one of: topic status change, practice question answered, or test submitted. Add a lightweight `activity_log` table (migration 0003) with `user_id, date, type`, protected by RLS.
+- [x] **6.4** Countdown to the exam date from the profile, if set.
 
 **Acceptance:** Marking a topic revised moves it out of today's list and schedules the next interval.
 
@@ -487,3 +487,6 @@ Keep a `BACKLOG.md` file for ideas that come up during development instead of bu
 2026-10-10 | Phase 1 | Completed auth, layouts, and onboarding.
 2026-10-11 | Phase 2 | Completed dashboard and syllabus views.
 2026-10-11 | Phase 3 | Completed practice mode and question fetching.
+2026-10-11 | Phase 4 | Completed mock test engine, test attempts, scoring, autosave.
+2026-10-11 | Phase 5 | Completed analytics charts, weak topics, and unit tests.
+2026-10-11 | Phase 6 | Completed planner, spaced repetition, study streak, and activity logging.

@@ -379,6 +379,30 @@ export interface Database {
           }
         ]
       }
+      activity_log: {
+        Row: {
+          id: string
+          user_id: string
+          date: string
+          type: 'topic_status_change' | 'practice_question' | 'test_submitted'
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          date: string
+          type: 'topic_status_change' | 'practice_question' | 'test_submitted'
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          date?: string
+          type?: 'topic_status_change' | 'practice_question' | 'test_submitted'
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
