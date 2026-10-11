@@ -42,7 +42,7 @@ export default async function TestResultPage({ params }: { params: { attemptId: 
     
   if (!answers) notFound()
 
-  const total = answers.length
+  const _total = answers.length
   const correct = answers.filter(a => a.is_correct === true).length
   const wrong = answers.filter(a => a.is_correct === false).length
   const unattempted = answers.filter(a => a.is_correct === null).length

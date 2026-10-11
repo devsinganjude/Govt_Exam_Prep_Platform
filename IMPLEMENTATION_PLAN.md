@@ -362,11 +362,11 @@ Seed the following so the app is usable immediately:
 **Acceptance:** Refreshing mid-test restores answers and the correct remaining time. The score matches the formula in Section 9.1. Auto-submit works.
 
 ### PHASE 5 — Analytics
-- [ ] **5.1** Score trend line chart (last 10 attempts).
-- [ ] **5.2** Subject-wise accuracy bar chart (all submitted attempts plus practice, if tracked).
-- [ ] **5.3** Weak-topic list: topics with accuracy below 50% and at least 5 attempted questions, sorted ascending. Each links to practice filtered on that topic.
-- [ ] **5.4** Time analysis: average seconds per question versus the target (`duration / question count`).
-- [ ] **5.5** Put the logic in `lib/analytics.ts` as pure functions with unit tests.
+- [x] **5.1** Score trend line chart (last 10 attempts).
+- [x] **5.2** Subject-wise accuracy bar chart (all submitted attempts plus practice, if tracked).
+- [x] **5.3** Weak-topic list: topics with accuracy below 50% and at least 5 attempted questions, sorted ascending. Each links to practice filtered on that topic.
+- [x] **5.4** Time analysis: average seconds per question versus the target (`duration / question count`).
+- [x] **5.5** Put the logic in `lib/analytics.ts` as pure functions with unit tests.
 
 **Acceptance:** Charts render with real data and with an empty state when no attempts exist.
 
