@@ -349,15 +349,15 @@ Seed the following so the app is usable immediately:
 **Acceptance:** Importing a 50-row CSV works, shows per-row errors for bad rows, and inserted questions appear in practice.
 
 ### PHASE 4 — Mock test engine
-- [ ] **4.1** `/tests/new`: create a test by choosing subjects or topics, number of questions, duration, and difficulty mix. Select questions randomly (server side), insert into `tests` (with `user_id`).
-- [ ] **4.2** Starting a test creates an `attempts` row and one `attempt_answers` row per question (null selection).
-- [ ] **4.3** `/tests/[attemptId]`: single-question view, question palette (answered, unanswered, marked for review), countdown timer, Next, Previous, Mark for Review, Clear Response.
-- [ ] **4.4** **Autosave:** every selection updates `attempt_answers` immediately (debounced no more than 500 ms). Track `time_spent_sec` per question.
-- [ ] **4.5** **Timer correctness:** compute remaining time from `started_at + duration`, not from a client counter alone, so refresh and reopen resume correctly. Auto-submit at zero.
-- [ ] **4.6** Submit flow: confirmation dialog showing answered / unanswered / marked counts. On submit, compute `is_correct` per answer and the score using `lib/scoring.ts`, then set `submitted_at`, `time_taken_sec`, `score`, `status = 'submitted'`.
-- [ ] **4.7** Block re-entry to a submitted attempt (redirect to result).
-- [ ] **4.8** `/tests/[attemptId]/result`: score, correct, wrong, unattempted, accuracy, time taken, subject-wise breakdown, and a review list where each question shows your answer, the correct answer, and the explanation.
-- [ ] **4.9** `/tests`: list past attempts with scores.
+- [x] **4.1** `/tests/new`: create a test by choosing subjects or topics, number of questions, duration, and difficulty mix. Select questions randomly (server side), insert into `tests` (with `user_id`).
+- [x] **4.2** Starting a test creates an `attempts` row and one `attempt_answers` row per question (null selection).
+- [x] **4.3** `/tests/[attemptId]`: single-question view, question palette (answered, unanswered, marked for review), countdown timer, Next, Previous, Mark for Review, Clear Response.
+- [x] **4.4** **Autosave:** every selection updates `attempt_answers` immediately (debounced no more than 500 ms). Track `time_spent_sec` per question.
+- [x] **4.5** **Timer correctness:** compute remaining time from `started_at + duration`, not from a client counter alone, so refresh and reopen resume correctly. Auto-submit at zero.
+- [x] **4.6** Submit flow: confirmation dialog showing answered / unanswered / marked counts. On submit, compute `is_correct` per answer and the score using `lib/scoring.ts`, then set `submitted_at`, `time_taken_sec`, `score`, `status = 'submitted'`.
+- [x] **4.7** Block re-entry to a submitted attempt (redirect to result).
+- [x] **4.8** `/tests/[attemptId]/result`: score, correct, wrong, unattempted, accuracy, time taken, subject-wise breakdown, and a review list where each question shows your answer, the correct answer, and the explanation.
+- [x] **4.9** `/tests`: list past attempts with scores.
 
 **Acceptance:** Refreshing mid-test restores answers and the correct remaining time. The score matches the formula in Section 9.1. Auto-submit works.
 
