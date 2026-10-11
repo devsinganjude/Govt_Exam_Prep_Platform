@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { Badge } from '@/components/ui/badge'
+import { TopicItem } from './TopicItem'
 
 export default async function SyllabusPage() {
   const supabase = await createClient()
@@ -42,17 +42,6 @@ export default async function SyllabusPage() {
     progressMap.set(p.topic_id, p.status)
   })
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'done':
-        return <Badge variant="default" className="bg-green-500 hover:bg-green-600">Done</Badge>
-      case 'in_progress':
-        return <Badge variant="secondary" className="bg-yellow-500/20 text-yellow-600 hover:bg-yellow-500/30">In Progress</Badge>
-      default:
-        return <Badge variant="outline">Not Started</Badge>
-    }
-  }
-
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6 max-w-4xl mx-auto">
       <div className="flex items-center justify-between space-y-2">
@@ -71,25 +60,31 @@ export default async function SyllabusPage() {
             <Accordion className="w-full">
               {subjects.map((subject) => {
                 const topics = (subject.topics as { id: string, name: string, weightage: number | null, sort_order: number }[]) || []
+                
+                // Calculate progress
+                const totalTopics = topics.length
+                const completedTopics = topics.filter(t => progressMap.get(t.id) === 'done').length
+                
                 return (
                   <AccordionItem key={subject.id} value={subject.id}>
-                    <AccordionTrigger className="text-lg font-semibold hover:no-underline">
-                      {subject.name}
+                    <AccordionTrigger className="text-sm md:text-lg font-semibold hover:no-underline">
+                      <div className="flex w-full items-center justify-between pr-4">
+                        <span>{subject.name}</span>
+                        <span className="text-xs md:text-sm font-normal text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                          {completedTopics} / {totalTopics}
+                        </span>
+                      </div>
                     </AccordionTrigger>
                     <AccordionContent>
                       <ul className="space-y-2 pt-2">
                         {topics
                           .sort((a, b) => a.sort_order - b.sort_order)
                           .map((topic) => (
-                            <li key={topic.id} className="flex items-center justify-between p-3 rounded-md border bg-card text-card-foreground shadow-sm">
-                              <span className="font-medium">{topic.name}</span>
-                              <div className="flex items-center gap-4">
-                                {topic.weightage && (
-                                  <span className="text-sm text-muted-foreground">{topic.weightage}% weight</span>
-                                )}
-                                {getStatusBadge(progressMap.get(topic.id) || 'not_started')}
-                              </div>
-                            </li>
+                            <TopicItem 
+                              key={topic.id} 
+                              topic={topic} 
+                              initialStatus={progressMap.get(topic.id) || 'not_started'} 
+                            />
                         ))}
                         {topics.length === 0 && (
                           <p className="text-sm text-muted-foreground italic p-2">No topics defined for this subject.</p>

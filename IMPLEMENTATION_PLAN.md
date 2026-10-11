@@ -329,11 +329,11 @@ Seed the following so the app is usable immediately:
 **Acceptance:** A new user can sign up, complete onboarding, see the shell, and log out. Two different accounts cannot see each other's profile data.
 
 ### PHASE 2 — Syllabus tracker
-- [ ] **2.1** `/syllabus`: list subjects as cards with a progress bar (done topics / total topics).
-- [ ] **2.2** `/syllabus/[subjectId]`: list topics with a 3-state control (not started, in progress, done). Show the weightage badge if present.
-- [ ] **2.3** Upserting into `topic_progress` on change, with optimistic UI and rollback on error.
-- [ ] **2.4** When a topic is marked **done** for the first time, set `revision_stage = 0` and compute `next_revision_at` (see Section 9.2).
-- [ ] **2.5** Dashboard widgets: overall syllabus completion %, subject-wise bars.
+- [x] **2.1** `/syllabus`: list subjects as cards with a progress bar (done topics / total topics).
+- [x] **2.2** `/syllabus/[subjectId]`: list topics with a 3-state control (not started, in progress, done). Show the weightage badge if present.
+- [x] **2.3** Upserting into `topic_progress` on change, with optimistic UI and rollback on error.
+- [x] **2.4** When a topic is marked **done** for the first time, set `revision_stage = 0` and compute `next_revision_at` (see Section 9.2).
+- [x] **2.5** Dashboard widgets: overall syllabus completion %, subject-wise bars.
 
 **Acceptance:** Progress persists after refresh. Percentages are correct. Works on a 360px screen.
 
